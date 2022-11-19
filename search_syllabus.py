@@ -45,6 +45,9 @@ def get_required_textbooks(course_code):
         # put the text in lowercase so that capitlization doesn't mess up the algorithm
         pdf_text = pdf_text.lower()
 
+        if pdf_text.find("contents") != -1:
+            continue
+
         if pdf_text.find("no required textbooks") != -1:
             return "No required textbooks for this course."
 
@@ -234,6 +237,9 @@ def get_prerequisites(course_code):
 
         pdf_text = pdf_text.lower()
         
+        if pdf_text.find("contents") != -1:
+            continue
+
         the_index = pdf_text.find("prerequisites")
 
         index = 0
@@ -284,4 +290,8 @@ def get_syllabus_info(course_code):
     }
     return syllabus_info
 
+#print(get_syllabus_info("cs2210")["Textbooks"])
+#print('\n')
 print(get_syllabus_info("cs2210")["Description"])
+#print('\n')
+print(get_syllabus_info("cs2210")["Prerequisites"])
