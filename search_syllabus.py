@@ -99,8 +99,22 @@ def get_required_textbooks(course_code):
                 retval = "No textbooks listed for this course."
             retval = pdf_text_proper_casing[textbook_index:textbook_index + index]
             return retval
-
+    
     return "No textbooks listed for this course."
+
+def search_textbook(textbook):
+    # what will be searched on google
+    query = "western bookstore " + textbook
+
+    url = ""
+
+    # loop thru the first 10 search results
+    for i in search(query, tld="co.in", num = 1, stop = 1, pause = 2):
+        url = i
+
+    if url == "":
+        return "Could not find a link to the textbook."
+    return url
 
 def get_course_description(course_code):
     '''
@@ -283,15 +297,18 @@ def get_prerequisites(course_code):
     return "No prerequisites were found."
 
 def get_syllabus_info(course_code):
+    required_textbooks = get_required_textbooks(course_code)
     syllabus_info = {
-        "Textbooks": get_required_textbooks(course_code),
+        "Textbooks": [required_textbooks, search_textbook(required_textbooks)],
         "Description": get_course_description(course_code),
         "Prerequisites": get_prerequisites(course_code)
     }
     return syllabus_info
 
-#print(get_syllabus_info("cs2210")["Textbooks"])
+#print(get_syllabus_info("cs2211")["Textbooks"][0])
+#print('\n')
+#print(get_syllabus_info("cs2211")["Textbooks"][1])
 #print('\n')
 print(get_syllabus_info("cs2210")["Description"])
 #print('\n')
-print(get_syllabus_info("cs2210")["Prerequisites"])
+#print(get_syllabus_info("cs2210")["Prerequisites"])
