@@ -272,4 +272,11 @@ def get_prerequisites(course_code):
             return retval
 
     return "No prerequisites were found."
-    
+
+def get_syllabus_info(course_code):
+    syllabus_info = {
+        "Textbooks": get_required_textbooks(course_code),
+        "Description": get_course_description(course_code),
+        "Prerequisites": get_prerequisites(course_code)
+    }
+    return syllabus_info
