@@ -141,6 +141,9 @@ def get_course_description(course_code):
         # put the text in lowercase so that capitlization doesn't mess up the algorithm
         pdf_text = pdf_text.lower()
         
+        if pdf_text.find("contents") != -1:
+            continue
+
         description_index = pdf_text.find("course information")
 
         if description_index == -1:
@@ -280,3 +283,5 @@ def get_syllabus_info(course_code):
         "Prerequisites": get_prerequisites(course_code)
     }
     return syllabus_info
+
+print(get_syllabus_info("cs2210")["Description"])
