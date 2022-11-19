@@ -52,7 +52,7 @@ def get_required_textbooks(course_code):
             return "No required textbooks for this course."
 
         # check if the syllabus uses 'required materials' instead of 'textbook' for their textbook header
-        textbook_index = pdf_text.find("required materials")
+        textbook_index = pdf_text.find("materials")
         
         # if they dont use required materials, assume it uses textbook and search for that instead
         if textbook_index == -1:
@@ -82,7 +82,7 @@ def get_required_textbooks(course_code):
         textbook_text = textbook_text.lower()
 
         # return the textbook info with the proper casing if info was found. Otherwise, let the user know that no textbook was listed for the course.
-        if textbook_text.find("required materials") != -1:
+        if textbook_text.find("materials") != -1:
             if textbook_text is None:
                 retval = "No textbooks listed for this course."
             retval = pdf_text_proper_casing[textbook_index:textbook_index + index]
@@ -103,6 +103,9 @@ def get_required_textbooks(course_code):
     return "No textbooks listed for this course."
 
 def search_textbook(textbook):
+    if textbook.find("required") != -1:
+        return "No textbooks required for this course."
+
     # what will be searched on google
     query = "western bookstore " + textbook
 
@@ -305,10 +308,10 @@ def get_syllabus_info(course_code):
     }
     return syllabus_info
 
-#print(get_syllabus_info("cs2211")["Textbooks"][0])
+print(get_syllabus_info("cs2210")["Textbooks"][0])
 #print('\n')
-#print(get_syllabus_info("cs2211")["Textbooks"][1])
+#print(get_syllabus_info("cs1027")["Textbooks"][1])
 #print('\n')
-print(get_syllabus_info("cs2210")["Description"])
+#print(get_syllabus_info("cs2210")["Description"])
 #print('\n')
 #print(get_syllabus_info("cs2210")["Prerequisites"])
