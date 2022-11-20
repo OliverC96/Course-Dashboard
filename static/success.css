@@ -106,3 +106,9 @@ input[type='checkbox'] {
 		border-bottom-right-radius: 6px;
 		padding: 1rem 2rem;
 	}
+
+#results_wrapper > .results {
+	background-color: #b388eb;
+	color: white;
+	margin-top: 20px;
+}
