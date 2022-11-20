@@ -4,10 +4,15 @@ import requests
 
 
 def profLookup(course):
-    query = course + " rate my prof"
+    query = course + " rate my prof + western university"
     websiteList = []
-    for x in search(query, tld="com", num=3, stop=3, pause=2):
-        websiteList.append(x)
+    count = 0
+    for x in search(query, tld="com", num=10, stop=10, pause=2):
+        if x.find("ratemyprofessors") != -1 and x.find("school") == -1:
+            websiteList.append(x)
+            count += 1
+        if count == 3:
+            break
     profDictonary = {}
     for x in range (len(websiteList)):
         profList = []
@@ -31,6 +36,3 @@ def profLookup(course):
         profList.append(rating1)
         profDictonary.update({fullName: profList})
     return profDictonary
-
-
-print(profLookup("Computer Science 1026A/B"))
