@@ -18,7 +18,7 @@ def home_page():
         courses = get_courses(program, module)
         data = {}
 
-        for course in courses[:3]:
+        for course in courses[10]:
 
             try:
 
@@ -27,8 +27,9 @@ def home_page():
                     "profs": profLookup(course)
                 }
 
-            except:
+            except Exception as e:
 
+                print(e)
                 continue
 
         return redirect(url_for("show_results", module=module, program=program, data=data))
