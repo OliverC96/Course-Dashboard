@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title> Course Dashboard </title>
+    <link href="../static/main.css" rel="stylesheet" type="text/css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500&family=Raleway:wght@200;300;400;500&family=Roboto+Slab:wght@200;300;400;500&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+
+</head>
+
+<body>
+
+    <ul>
+
+        <h1> Western University Course Dashboard </h1>
+        <h3> A helpful tool for students to access important information regarding their program and module! </h3>
+        <ul>
+            <li> Step 1: Enter your program (i.e. Computer Science, Chemistry, English) and your module (i.e. Major, Minor, Specialization, Honours Specialization) </li>
+            <li> Step 2: Discover required/recommended courses for your degree, professor ratings, and necessary course materials, all in one search! </li>
+        </ul>
+
+        <div class="form-style-8">
+          <form method="post" action="{{ url_for('home_page') }}">
+            <input type="text" name="program" placeholder="Enter your program" />
+            <input type="text" name="module" placeholder="Enter your module" />
+            <input type="submit" value="Search" />
+          </form>
+        </div>
+
+    </ul>
+
+</body>
+
+</html>
