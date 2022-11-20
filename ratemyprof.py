@@ -17,7 +17,7 @@ def profLookup(course):
     for x in range (len(websiteList)):
         profList = []
         url = websiteList[x]
-        result = requests.get(url)
+        result = requests.get(url, headers = {'User-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.5 Safari/605.1.15'})
         doc = BeautifulSoup(result.text, "html.parser")
         soup = doc.find('div', class_="NameTitle__Name-dowf0z-0 cfjPUG")
         soup1 = doc.find('div', class_="RatingValue__NumRatings-qw8sqy-0 jMkisx")
@@ -35,4 +35,13 @@ def profLookup(course):
         profList.append(professorTakeAgain1)
         profList.append(rating1)
         profDictonary.update({fullName: profList})
-    return profDictonary
+        retStr = ""
+
+        for prof, rating in profDictonary.items():
+
+            prof_info = "{}({}/5), ".format(prof, rating[0])
+            retStr += prof_info
+
+    return retStr.rstrip(", ")
+
+
