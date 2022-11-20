@@ -42,7 +42,7 @@
 
             {% for name, course in data.items() %}
 
-            <div class=".results">
+            <div class="results">
 
                 <h2> {{ name.strip(",") }} </h2>
                 <h4> Prerequisites: {{ course["syllabus"]["Prerequisites"].strip("Prerequisites\n 1. ").replace("\n", "") }} </h4>
