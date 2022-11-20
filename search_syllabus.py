@@ -52,7 +52,7 @@ def get_required_textbooks(course_code):
             return "No required textbooks for this course."
 
         # check if the syllabus uses 'required materials' instead of 'textbook' for their textbook header
-        textbook_index = pdf_text.find("materials")
+        textbook_index = pdf_text.find("course materials")
         
         # if they dont use required materials, assume it uses textbook and search for that instead
         if textbook_index == -1:
@@ -71,7 +71,8 @@ def get_required_textbooks(course_code):
             if pdf_text[textbook_index+index:textbook_index+index+10].find("   ") != -1:
                 break
 
-            if j == '.' and index > 50:
+            if j == '.' and index > 150:
+                index += 1
                 break
             index += 1
 
@@ -82,7 +83,7 @@ def get_required_textbooks(course_code):
         textbook_text = textbook_text.lower()
 
         # return the textbook info with the proper casing if info was found. Otherwise, let the user know that no textbook was listed for the course.
-        if textbook_text.find("materials") != -1:
+        if textbook_text.find("course materials") != -1:
             if textbook_text is None:
                 retval = "No textbooks listed for this course."
             retval = pdf_text_proper_casing[textbook_index:textbook_index + index]
@@ -164,10 +165,10 @@ def get_course_description(course_code):
         if pdf_text.find("contents") != -1:
             continue
 
-        description_index = pdf_text.find("course information")
+        description_index = pdf_text.find("description")
 
         if description_index == -1:
-            description_index = pdf_text.find("description")
+            description_index = pdf_text.find("course information")
 
         index = 0
         count = 0 # num of newlines
@@ -308,10 +309,12 @@ def get_syllabus_info(course_code):
     }
     return syllabus_info
 
-print(get_syllabus_info("cs2210")["Textbooks"][0])
+cc = "Computer Science 2214A/B"
+
+print(get_syllabus_info(cc)["Textbooks"][0])
 #print('\n')
 #print(get_syllabus_info("cs1027")["Textbooks"][1])
-#print('\n')
-#print(get_syllabus_info("cs2210")["Description"])
-#print('\n')
-#print(get_syllabus_info("cs2210")["Prerequisites"])
+print('\n')
+print(get_syllabus_info(cc)["Description"])
+print('\n')
+print(get_syllabus_info(cc)["Prerequisites"])
