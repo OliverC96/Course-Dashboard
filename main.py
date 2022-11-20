@@ -18,7 +18,7 @@ def home_page():
         courses = get_courses(program, module)
         data = {}
 
-        for course in courses[10]:
+        for course in courses[:10]:
 
             try:
 
