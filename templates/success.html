@@ -20,30 +20,36 @@
 
         <div id="results_wrapper">
 
-            {% for course in data %}
-
             <div class="wrap-collapsible">
 
               <input id="collapsible" class="toggle" type="checkbox">
-              <label for="collapsible" class="lbl-toggle"> {{ course.strip(",") }} </label>
+              <label for="collapsible" class="lbl-toggle"> Testing </label>
               <div class="collapsible-content">
                 <div class="content-inner">
                   <div>
 
-                    <h4> Prerequisites: {{ data[course]["syllabus"]["Prerequisites"].strip("Prerequisites\n 1. ").replace("\n", "") }} </h4>
-                    <h4> Taught by:
-
-                        {% for prof, ratings in data[course]["profs"].items() %}
-                            {{ prof (ratings[0]), }}
-                        {% endfor %}
-
+                    <h4> Prerequisites:  </h4>
+                    <h4> Taught by: Mike Bauer, Charles Ling
                     </h4>
-                    <h4> Required course materials: {{ data[course]["syllabus"]["Textbooks"].strip("Textbook\n") }}</h4>
-                    <h4> Summary: </h4> <p> {{ data[course]["syllabus"]["Description"].strip("Description\n") }} </p>
+                    <h4> Required course materials: </h4>
+                    <h4> Summary: </h4>
 
                   </div>
                 </div>
               </div>
+
+            </div>
+
+            {% for name, course in data.items() %}
+
+            <div class="results">
+
+                <h2> {{ name.strip(",") }} </h2>
+                <h4> Prerequisites: {{ course["syllabus"]["Prerequisites"].strip("Prerequisites\n 1. ").replace("\n", "") }} </h4>
+                <h4> Taught by: Mike Bauer, Charles Ling
+                </h4>
+                <h4> Required course materials: {{ course["syllabus"]["Textbooks"].strip("Textbook\n") }}</h4>
+                <h4> Summary: </h4> <p> {{ course["syllabus"]["Description"].strip("Description\n") }} </p>
 
             </div>
 
@@ -56,3 +62,4 @@
 </body>
 
 </html>
+
