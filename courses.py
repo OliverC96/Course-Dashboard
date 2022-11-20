@@ -51,19 +51,21 @@ def get_courses(program, module):
         By.XPATH, "//*[@id='AdmissionRequirements']/div/span/a")
     # print(dir_course)
     for s in dir_course:
-        courseList.append(s.text)
+        courseList.append(s.text.strip(","))
         #print(s.text)
 
     dir_module = driver.find_elements(
         By.XPATH, "//*[@id='ModuleInformationDiv']/div[1]/div[9]/div/p/a")
     # print(dir_module
     for s in dir_module:
-        courseList.append(s.text)
+        courseList.append(s.text.strip(","))
         #print(s.text)
 
-    for n in courseList:
-        print(n + " ", end='')
 
+    # for n in courseList:
+    #     print(n)
+    # print(courseList)
+    
     return courseList
 
-# get_courses("Computer Science", "Honours Specialization")
+get_courses("Computer Science", "Honours Specialization")
